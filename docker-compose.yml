@@ -1,0 +1,57 @@
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_DB: "dcoya"
+      POSTGRES_USER: "dcoya"
+      POSTGRES_PASSWORD: "dcoya123"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dcoya -d dcoya"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@test.com"
+      PGADMIN_DEFAULT_PASSWORD: "dcoyaadmin"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    depends_on:
+      - postgres
+        
+  flask:
+    container_name: flask
+    build: '.'
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    volumes:
+      - ./dcoya:/usr/src/app/dcoya
+    depends_on:
+      - postgres
+
+
+volumes:
+  pgdata:
+  pgadmin-data:
+  dcoya:
