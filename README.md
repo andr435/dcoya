@@ -1,10 +1,10 @@
 To run project: docker-compose up -d
 
-Swagger: [127.0.0.1:5000/ ](http://127.0.0.1:5000/apidocs/)
+Swagger: [http://127.0.0.1:5000/ ](http://127.0.0.1:5000/apidocs/)
 
 PostgreSQL viewer:
 
-PgAdmin:[ http://localhost:8081/index.php](http://127.0.0.1:5050/browser/)
+PgAdmin:[http://127.0.0.1:5050/browser/](http://127.0.0.1:5050/browser/)
 
 Host: postgres_container
 
