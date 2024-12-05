@@ -44,7 +44,7 @@ services:
     build: '.'
     restart: unless-stopped
     ports:
-      - 5000:5000
+      - 8000:8000
     volumes:
       - ./dcoya:/usr/src/app/dcoya
     depends_on:
