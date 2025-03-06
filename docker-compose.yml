@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres_container
-    image: postgres
+    image: postgres:17-alpine
     environment:
       POSTGRES_DB: "dcoya"
       POSTGRES_USER: "dcoya"
